@@ -15,68 +15,68 @@ y = X.loc[:,'Loan_Status']
 
 
 # comparison between Marrige and Loan
-a = pd.crosstab(X['Married'],y)
-plt.xlabel('Married')
-plt.ylabel('Count')
-plt.bar(['No','Yes'],a['Y'].values)
-plt.bar(['No','Yes'],a['N'].values)
-plt.legend(['Got Loan','Didnt get Loan'])
-plt.show()
+# a = pd.crosstab(X['Married'],y)
+# plt.xlabel('Married')
+# plt.ylabel('Count')
+# plt.bar(['No','Yes'],a['Y'].values)
+# plt.bar(['No','Yes'],a['N'].values)
+# plt.legend(['Got Loan','Didnt get Loan'])
+# plt.show()
 
-a = pd.crosstab(X['Gender'],y)
-plt.xlabel('Gender')
-plt.ylabel('Count')
-plt.bar(['Female','Male'],a['Y'].values)
-plt.bar(['Female','Male'],a['N'].values)
-plt.legend(['Got Loan','Didnt get Loan'])
-plt.show()
+# a = pd.crosstab(X['Gender'],y)
+# plt.xlabel('Gender')
+# plt.ylabel('Count')
+# plt.bar(['Female','Male'],a['Y'].values)
+# plt.bar(['Female','Male'],a['N'].values)
+# plt.legend(['Got Loan','Didnt get Loan'])
+# plt.show()
 
-a = pd.crosstab(X['Self_Employed'],y)
-plt.xlabel('Self Employed')
-plt.ylabel('Count')
-plt.bar(['No','Yes'],a['Y'].values)
-plt.bar(['No','Yes'],a['N'].values)
-plt.legend(['Got Loan','Didnt get Loan'])
-plt.show()
+# a = pd.crosstab(X['Self_Employed'],y)
+# plt.xlabel('Self Employed')
+# plt.ylabel('Count')
+# plt.bar(['No','Yes'],a['Y'].values)
+# plt.bar(['No','Yes'],a['N'].values)
+# plt.legend(['Got Loan','Didnt get Loan'])
+# plt.show()
 
-a = pd.crosstab(X['Education'],y)
-plt.xlabel('Education')
-plt.ylabel('Count')
-plt.bar(['Graduate','Not Graduate'],a['Y'].values)
-plt.bar(['Graduate','Not Graduate'],a['N'].values)
-plt.legend(['Got Loan','Didnt get Loan'])
-plt.show()
-
-
-a = pd.crosstab(X['Credit_History'],y)
-plt.xlabel('Credit History')
-plt.ylabel('Count')
-plt.bar(['0','1'],a['Y'].values)
-plt.bar(['0','1'],a['N'].values)
-plt.legend(['Got Loan','Didnt get Loan'])
-plt.show()
+# a = pd.crosstab(X['Education'],y)
+# plt.xlabel('Education')
+# plt.ylabel('Count')
+# plt.bar(['Graduate','Not Graduate'],a['Y'].values)
+# plt.bar(['Graduate','Not Graduate'],a['N'].values)
+# plt.legend(['Got Loan','Didnt get Loan'])
+# plt.show()
 
 
+# a = pd.crosstab(X['Credit_History'],y)
+# plt.xlabel('Credit History')
+# plt.ylabel('Count')
+# plt.bar(['0','1'],a['Y'].values)
+# plt.bar(['0','1'],a['N'].values)
+# plt.legend(['Got Loan','Didnt get Loan'])
+# plt.show()
 
-a = pd.crosstab(X['Property_Area'],y)
-plt.xlabel('Property Area')
-plt.ylabel('Count')
-plt.bar(['Rural','Semi Urban','Urban'],a['Y'].values)
-plt.bar(['Rural','Semi Urban','Urban'],a['N'].values)
-plt.legend(['Got Loan','Didnt get Loan'])
-plt.show()
 
-t = X.corr()
-fig, ax = plt.subplots()
-ax.imshow(t, cmap='hot')
-ax.set_xticks([0,1,2,3,4,5,6,7])
-ax.set_yticks([0,1,2,3,4,5,6,7])
-ax.set_xticklabels(t.columns)
-ax.set_yticklabels(t.columns)
-plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
-         rotation_mode="anchor")
-ax.set_title("Heat Map For various properties")
-plt.show()
+
+# a = pd.crosstab(X['Property_Area'],y)
+# plt.xlabel('Property Area')
+# plt.ylabel('Count')
+# plt.bar(['Rural','Semi Urban','Urban'],a['Y'].values)
+# plt.bar(['Rural','Semi Urban','Urban'],a['N'].values)
+# plt.legend(['Got Loan','Didnt get Loan'])
+# plt.show()
+
+# t = X.corr()
+# fig, ax = plt.subplots()
+# ax.imshow(t, cmap='hot')
+# ax.set_xticks([0,1,2,3,4,5,6,7])
+# ax.set_yticks([0,1,2,3,4,5,6,7])
+# ax.set_xticklabels(t.columns)
+# ax.set_yticklabels(t.columns)
+# plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
+#          rotation_mode="anchor")
+# ax.set_title("Heat Map For various properties")
+# plt.show()
 
 X['Loan_Status'].replace('Y',1,inplace=True)
 X['Loan_Status'].replace('N',0,inplace=True)
@@ -105,17 +105,17 @@ m = size[0]
 input_layer_size = size[1]
 hidden_layer_size = 5 
 final_layer_size = 1   
-lamb =3
+lamb =1
 alpha = 0.1
 cost = []
 X_train = np.array(X_train)
 theta1 = np.random.rand(hidden_layer_size,input_layer_size+1)
 theta2 = np.random.rand(final_layer_size,hidden_layer_size+1)
-for j in range(0,2500):
+for j in range(0,1000):
+    a3 = forwardProp(X_train,theta1,theta2)
     newtheta1,newtheta2 = backwardProp(X_train,y_train,theta1,theta2,lamb)
     theta1 = theta1 - alpha*newtheta1
     theta2 = theta2 - alpha*newtheta2
-    a3 = forwardProp(X_train,theta1,theta2)
     J = costFunction(a3,y_train,theta1,theta2,lamb)
     cost.append(J)
 plt.plot(cost)
